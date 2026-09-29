@@ -15,12 +15,13 @@ connectDB().then(() => {
 });
 
 const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "http://localhost:5000",
   "https://dedivinedecor.in",
   "https://www.dedivinedecor.in",
   "http://dedivinedecor.in",
   "http://www.dedivinedecor.in",
-  "http://localhost:5173",
-  "http://localhost:3000",
 ];
 
 if (process.env.FRONTEND_URL) {
@@ -34,6 +35,7 @@ app.use(
       if (!origin) return callback(null, true);
       if (
         allowedOrigins.indexOf(origin) !== -1 ||
+        origin.startsWith("http://localhost") ||
         origin.endsWith("dedivinedecor.in") ||
         process.env.NODE_ENV !== "production"
       ) {
